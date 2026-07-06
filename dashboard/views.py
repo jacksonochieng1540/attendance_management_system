@@ -25,9 +25,6 @@ def _is_staff_role(user):
     return user.is_authenticated and (user.is_admin_role or user.is_teacher_hr_role)
 
 
-# ---------------------------------------------------------------------------
-# Auth
-# ---------------------------------------------------------------------------
 class DashboardLoginView(LoginView):
     template_name = 'registration/login.html'
     authentication_form = DashboardLoginForm
@@ -37,10 +34,6 @@ class DashboardLoginView(LoginView):
 class DashboardLogoutView(LogoutView):
     next_page = reverse_lazy('dashboard:login')
 
-
-# ---------------------------------------------------------------------------
-# Home / Dashboard (overview cards + quick stats)
-# ---------------------------------------------------------------------------
 @login_required
 def home(request):
     user = request.user
@@ -68,10 +61,6 @@ def home(request):
     context['today'] = today
     return render(request, 'dashboard/home.html', context)
 
-
-# ---------------------------------------------------------------------------
-# Manage Users (Admin only) — login accounts (Admin/Teacher-HR/Student-Employee)
-# ---------------------------------------------------------------------------
 @login_required
 @user_passes_test(_is_admin, login_url='dashboard:home')
 def manage_users(request):
@@ -122,9 +111,6 @@ def user_delete(request, pk):
     return render(request, 'dashboard/confirm_delete.html', {'object': user_obj, 'title': 'Delete User'})
 
 
-# ---------------------------------------------------------------------------
-# Manage Employees/Students (Admin & Teacher/HR)
-# ---------------------------------------------------------------------------
 @login_required
 @user_passes_test(_is_staff_role, login_url='dashboard:home')
 def employee_list(request):
@@ -197,10 +183,6 @@ def department_list(request):
         form = DepartmentForm()
     return render(request, 'dashboard/department_list.html', {'departments': departments, 'form': form})
 
-
-# ---------------------------------------------------------------------------
-# Mark Attendance (Admin & Teacher/HR) — daily marking, single or bulk
-# ---------------------------------------------------------------------------
 @login_required
 @user_passes_test(_is_staff_role, login_url='dashboard:home')
 def mark_attendance(request):
@@ -276,10 +258,6 @@ def attendance_edit(request, pk):
         'form': form, 'editing': True, 'todays_records': [], 'today': timezone.localdate(),
     })
 
-
-# ---------------------------------------------------------------------------
-# View / Search / Filter / Export Reports
-# ---------------------------------------------------------------------------
 @login_required
 def view_reports(request):
     user = request.user
@@ -305,7 +283,6 @@ def view_reports(request):
 
     records = AttendanceFilter(django_filter_params, queryset=base_qs).qs.order_by('-date')
 
-    # Preserve filters when clicking "Export"
     export_query = request.GET.urlencode()
 
     return render(request, 'dashboard/view_reports.html', {
