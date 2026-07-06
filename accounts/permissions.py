@@ -33,7 +33,6 @@ class IsOwnerOrStaff(BasePermission):
         if user.is_admin_role or user.is_teacher_hr_role:
             return True
         if request.method in SAFE_METHODS:
-            # obj is expected to expose `.employee.user` (Attendance) or be an Employee
             owner_user = getattr(getattr(obj, 'employee', obj), 'user', None)
             return owner_user_id_matches(owner_user, user)
         return False
