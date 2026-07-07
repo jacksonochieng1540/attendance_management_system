@@ -5,7 +5,6 @@ from employees.models import Employee
 
 
 class Attendance(models.Model):
-    """One row per employee/student, per calendar day."""
 
     class Status(models.TextChoices):
         PRESENT = 'PRESENT', 'Present'
