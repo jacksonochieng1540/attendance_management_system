@@ -31,7 +31,6 @@ class RegisterView(generics.CreateAPIView):
 
 
 class MeView(generics.RetrieveUpdateAPIView):
-    """GET/PATCH the currently authenticated user's own profile."""
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
