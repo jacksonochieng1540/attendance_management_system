@@ -59,15 +59,6 @@ from django.db import models
 
 
 class User(AbstractUser):
-    """
-    Custom user model so we can attach a `role` field, which drives
-    permissions throughout the system:
-
-    - ADMIN        : full access (manage users, all attendance, all reports)
-    - TEACHER_HR    : can add students/employees, mark attendance, view reports
-    - STUDENT_EMPLOYEE : can only view their own attendance history
-    """
-
     class Role(models.TextChoices):
         ADMIN = 'ADMIN', 'Admin'
         TEACHER_HR = 'TEACHER_HR', 'Teacher / HR'
