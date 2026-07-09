@@ -103,25 +103,33 @@ TEMPLATES = [
 WSGI_APPLICATION = 'attendance_management_system.wsgi.application'
 ASGI_APPLICATION = 'attendance_management_system.asgi.application'
 
+AUTH_USER_MODEL = 'accounts.User'
+
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASE_URL = config('DATABASE_URL', default='')
-if DATABASE_URL:
-    DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+# DATABASE_URL = config('DATABASE_URL', default='')
+# if DATABASE_URL:
+#     DATABASES = {
+#         'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+#     }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
 
 
-AUTH_USER_MODEL = 'accounts.User'
 
 LOGIN_URL = 'dashboard:login'
 LOGIN_REDIRECT_URL = 'dashboard:home'

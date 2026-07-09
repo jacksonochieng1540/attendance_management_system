@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Departments{% endblock %}
+{% block content %}
+<h3 class="mb-3">Departments</h3>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card card-stat p-3">
+            <table class="table table-hover align-middle">
+                <thead><tr><th>Name</th><th>Description</th><th>Employees/Students</th></tr></thead>
+                <tbody>
+                {% for dept in departments %}
+                    <tr>
+                        <td>{{ dept.name }}</td>
+                        <td>{{ dept.description|default:"-" }}</td>
+                        <td><span class="badge bg-primary">{{ dept.emp_count }}</span></td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="3" class="text-center text-muted">No departments yet.</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-stat p-4">
+            <h5>Add Department</h5>
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary mt-2 w-100">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
