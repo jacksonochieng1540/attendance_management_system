@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="card card-stat p-4" style="max-width: 500px;">
+    <h4>{{ title }}</h4>
+    <p>Are you sure you want to delete <strong>{{ object }}</strong>? This cannot be undone.</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="javascript:history.back()" class="btn btn-outline-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<h3 class="mb-3">{{ title }}</h3>
+<div class="card card-stat p-4" style="max-width: 600px;">
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary mt-2">Save</button>
+        <a href="{% url 'dashboard:manage_users' %}" class="btn btn-outline-secondary mt-2">Cancel</a>
+    </form>
+</div>
+{% endblock %}

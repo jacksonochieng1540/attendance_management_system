@@ -1,0 +1,26 @@
+body {
+    background-color: #f4f6f9;
+}
+
+.card-stat {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.card-stat .display-6 {
+    font-weight: 700;
+}
+
+.badge-present { background-color: #198754; }
+.badge-absent  { background-color: #dc3545; }
+.badge-leave   { background-color: #fd7e14; }
+
+.table thead th {
+    background-color: #1F4E78;
+    color: #fff;
+}
+
+.navbar-brand {
+    letter-spacing: 0.5px;
+}
