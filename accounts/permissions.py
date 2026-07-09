@@ -2,7 +2,6 @@ from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 
 class IsAdmin(BasePermission):
-    """Only Admin accounts may access this view."""
 
     def has_permission(self, request, view):
         return bool(request.user and request.user.is_authenticated and request.user.is_admin_role)
@@ -20,11 +19,6 @@ class IsAdminOrTeacherHR(BasePermission):
 
 
 class IsOwnerOrStaff(BasePermission):
-    """
-    Students/Employees can only read their own records.
-    Admin and Teacher/HR can read and write any record.
-    """
-
     def has_permission(self, request, view):
         return bool(request.user and request.user.is_authenticated)
 
@@ -33,7 +27,6 @@ class IsOwnerOrStaff(BasePermission):
         if user.is_admin_role or user.is_teacher_hr_role:
             return True
         if request.method in SAFE_METHODS:
-            # obj is expected to expose `.employee.user` (Attendance) or be an Employee
             owner_user = getattr(getattr(obj, 'employee', obj), 'user', None)
             return owner_user_id_matches(owner_user, user)
         return False
