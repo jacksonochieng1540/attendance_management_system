@@ -3,7 +3,6 @@ from django.utils import timezone
 from .models import Attendance
 from employees.models import Employee, Department
 
-
 class AttendanceForm(forms.ModelForm):
     class Meta:
         model = Attendance
