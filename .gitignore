@@ -8,4 +8,3 @@ media/
 staticfiles/
 .venv/
 venv/
-*.log
