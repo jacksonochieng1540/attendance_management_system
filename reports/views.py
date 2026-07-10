@@ -9,7 +9,6 @@ from .utils import export_attendance_to_excel, export_attendance_to_pdf
 
 
 def _filtered_queryset(request):
-    """Applies role-based visibility, then the same AttendanceFilter used by the API."""
     user = request.user
     base_qs = Attendance.objects.select_related('employee', 'employee__department')
 
