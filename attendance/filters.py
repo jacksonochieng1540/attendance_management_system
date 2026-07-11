@@ -3,7 +3,6 @@ from .models import Attendance
 
 
 class AttendanceFilter(django_filters.FilterSet):
-    """Powers both the API (?date_after=...&status=PRESENT) and the dashboard search."""
 
     date_after = django_filters.DateFilter(field_name='date', lookup_expr='gte')
     date_before = django_filters.DateFilter(field_name='date', lookup_expr='lte')
