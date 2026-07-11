@@ -3,10 +3,7 @@ from django.db import models
 
 
 class ReportLog(models.Model):
-    """
-    Keeps a history of generated reports (who exported what, and when),
-    matching the 'reports' table in the system design.
-    """
+ 
 
     class FileType(models.TextChoices):
         EXCEL = 'EXCEL', 'Excel (.xlsx)'
